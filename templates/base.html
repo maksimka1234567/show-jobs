@@ -20,22 +20,42 @@
     {% block content %}{% endblock %}
 </main>
 <nav>
-        {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated %}
     <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
-{% else %}
+    {% else %}
     <p>
         <a href="register" class="btn btn-primary " href="/register">Зарегистрироваться</a>
         <a href="login" class="btn btn-success" href="/login">Войти</a>
     </p>
-{% endif %}
+    {% endif %}
     {% if current_user.is_authenticated %}
     <a href="jobs" class="btn btn-secondary">Добавить работу</a>
-{% endif %}
-{% if current_user.is_authenticated %}
+    {% endif %}
+    {% if current_user.is_authenticated %}
+    <title>Works Log</title>
     {% for job in current_user.jobs %}
-    <div>{{ job.job }}</div>
+    <table class="table table-success table-striped-columns">
+        <tr>
+            <td>Название работы</td>
+            <td>Тимлид</td>
+            <td>Список участников</td>
+            <td>Время работы</td>
+            <td>Состояние</td>
+        </tr>
+        <tr>
+            <td>{{job.job}}</td>
+            <td>{{job.team_leader}}</td>
+            <td>{{job.collaborators}}</td>
+            <td>{{job.work_size}}</td>
+            {% if job.is_finished %}
+                <td>Завершено</td>
+            {% else %}
+                <td>Не завершено</td>
+            {% endif %}
+        </tr>
+    </table>
     {% endfor %}
-{% endif %}
+    {% endif %}
 </nav>
 </body>
 </html>
