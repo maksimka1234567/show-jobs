@@ -32,7 +32,7 @@
     <a href="jobs" class="btn btn-secondary">Добавить работу</a>
     {% endif %}
     {% if current_user.is_authenticated %}
-    <title>Works Log</title>
+    <h1 align="center">Works Log</h1>
     {% for job in jobs %}
     <table class="table table-success table-striped-columns">
         <tr>
@@ -63,7 +63,7 @@
             Удалить
         </a>
     </div>
-{% endif %}
+    {% endif %}
     {% endfor %}
     {% endif %}
 </nav>
