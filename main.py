@@ -85,7 +85,7 @@ def add_jobs():
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         jobs = Jobs()
-        jobs.team_leader = form.team_leader.data
+        jobs.team_leader = current_user.id
         jobs.job = form.job.data
         jobs.work_size = form.work_size.data
         jobs.collaborators = form.collaborators.data
