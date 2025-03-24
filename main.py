@@ -119,7 +119,7 @@ def edit_jobs(id):
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         jobs = db_sess.query(Jobs).filter(Jobs.id == id,
-                                          Jobs.team_leader == current_user.id
+                                          (Jobs.team_leader == current_user.id) | (current_user.id == 1)
                                           ).first()
         if jobs:
             jobs.job = form.job.data
@@ -138,10 +138,10 @@ def edit_jobs(id):
 
 @app.route('/jobs_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
-def news_delete(id):
+def jobs_delete(id):
     db_sess = db_session.create_session()
     jobs = db_sess.query(Jobs).filter(Jobs.id == id,
-                                      Jobs.team_leader == current_user.id
+                                      (Jobs.team_leader == current_user.id) | (current_user.id == 1)
                                       ).first()
     if jobs:
         db_sess.delete(jobs)
