@@ -28,7 +28,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
+    return db_sess.get(User, user_id)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -64,10 +64,11 @@ def register():
                            form=form)
 
 
-
 @app.route('/')
 def home():
-    return render_template('base.html')
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Jobs).all()
+    return render_template('base.html', jobs=jobs)
 
 
 @app.route('/logout')
@@ -81,7 +82,6 @@ def logout():
 @login_required
 def add_jobs():
     form = JobsForm()
-
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         jobs = Jobs()

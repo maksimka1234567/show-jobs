@@ -33,7 +33,7 @@
     {% endif %}
     {% if current_user.is_authenticated %}
     <title>Works Log</title>
-    {% for job in current_user.jobs %}
+    {% for job in jobs %}
     <table class="table table-success table-striped-columns">
         <tr>
             <td>Название работы</td>
@@ -46,11 +46,11 @@
             <td>{{job.job}}</td>
             <td>{{job.team_leader}}</td>
             <td>{{job.collaborators}}</td>
-            <td>{{job.work_size}}</td>
+            <td>{{job.work_size}} часов</td>
             {% if job.is_finished %}
-                <td>Завершено</td>
+            <td>Завершено</td>
             {% else %}
-                <td>Не завершено</td>
+            <td>Не завершено</td>
             {% endif %}
         </tr>
     </table>
