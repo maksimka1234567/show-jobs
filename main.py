@@ -68,7 +68,7 @@ def register():
 def home():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Jobs).all()
-    return render_template('base.html', jobs=jobs)
+    return render_template('base.html', jobs=jobs, current_page="")
 
 
 @app.route('/logout')
