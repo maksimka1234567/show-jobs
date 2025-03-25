@@ -18,6 +18,7 @@ class User(SqlAlchemyBase, UserMixin):
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
     jobs = orm.relationship("Jobs", back_populates='user', lazy=False)
+    departments = orm.relationship("Department", back_populates='user', lazy=False)
 
     def check_password(self, pw):
         if pw == self.hashed_password:

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if current_page == "add_department" %}
+    <title>Добавление департамента</title>
+    {% elif current_page == 'department/' %}
+    <title>Изменение департамента</title>
+    {% endif %}
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_page == "add_department" %}
+    <h1 align="center">Добавление департамента</h1>
+    {% elif current_page == 'department/' %}
+    <h1 align="Center">Изменение департамента</h1>
+    {% endif %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}<br>
+        {% for error in form.title.errors %}
+            <p title="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.members.label }}<br>
+        {{ form.members(class="form-control") }}<br>
+        {% for error in form.members.errors %}
+            <p members="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(class="form-control") }}<br>
+        {% for error in form.email.errors %}
+            <p email="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+{% endblock %}
+</body>
+</html>

@@ -13,3 +13,6 @@ class JobsForm(FlaskForm):
     end_date = DateTimeField("Конец работы", default=datetime.datetime.now())
     is_finished = BooleanField("Завершена")
     submit = SubmitField('Применить', validators=[DataRequired()])
+
+
+

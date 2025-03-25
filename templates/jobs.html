@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% if current_page == "add_job" %}
     <title>Добавление работы</title>
+    {% elif current_page == 'job/' %}
+    <title>Изменение работы</title>
+    {% endif %}
 </head>
 <body>
 {% extends "base.html" %}
 
 {% block content %}
-<h1 align="center">Добавление работы</h1>
+{% if current_page == "add_job" %}
+    <h1 align="center">Добавление работы</h1>
+    {% elif current_page == 'job/' %}
+    <h1 align="center">Изменение работы</h1>
+    {% endif %}
 <form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
