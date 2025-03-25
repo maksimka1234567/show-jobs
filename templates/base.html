@@ -47,11 +47,13 @@
     <a href="/departments" class="btn btn-secondary">К списку департаментов</a>
     <h1 align="center">Works Log</h1>
     {% for job in jobs %}
+    <h2>Работа № {{job.id}}</h2>
     <table class="table table-success table-striped-columns">
         <tr>
             <td>Название работы</td>
             <td>Тимлид</td>
             <td>Список участников</td>
+            <td>Категория</td>
             <td>Время работы</td>
             <td>Состояние</td>
         </tr>
@@ -59,6 +61,7 @@
             <td>{{job.job}}</td>
             <td>{{job.user.name}}</td>
             <td>{{job.collaborators}}</td>
+            <td>{{job.categories[0].id}}</td>
             <td>{{job.work_size}} часов</td>
             {% if job.is_finished %}
             <td>Завершено</td>
@@ -77,6 +80,7 @@
         </a>
     </div>
     {% endif %}
+    <p style="font-size: 30px"><br></p>
     {% endfor %}
 
     {% elif current_page == "departments" %}
@@ -84,6 +88,7 @@
     <a href="/" class="btn btn-secondary">К списку работ</a>
     <h1 align="center">Departments Log</h1>
     {% for department in departments %}
+    <h2>Департамент № {{department.id}}</h2>
     <table class="table table-success table-striped-columns">
         <tr>
             <td>Название департамента</td>
@@ -108,6 +113,7 @@
         </a>
     </div>
     {% endif %}
+    <p style="font-size: 30px"><br></p>
     {% endfor %}
     {% endif %}
     {% endif %}

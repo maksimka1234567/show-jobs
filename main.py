@@ -6,6 +6,7 @@ from data import db_session
 from data.users import User
 from data.jobs import Jobs
 from data.departments import Department
+from data.category import Category
 from forms.jobsform import JobsForm
 from forms.registerform import RegisterForm
 from forms.departmentform import DepartmentForm
@@ -98,6 +99,13 @@ def add_job():
         jobs.job = form.job.data
         jobs.work_size = form.work_size.data
         jobs.collaborators = form.collaborators.data
+        category_id = form.category.data
+        category = db_sess.query(Category).filter_by(id=category_id).first()
+        if not category:
+            category = Category(id=category_id)
+            db_sess.add(category)
+            db_sess.commit()
+        jobs.categories.append(category)
         jobs.start_date = form.start_date.data
         jobs.end_date = form.end_date.data
         jobs.is_finished = form.is_finished.data
@@ -122,6 +130,7 @@ def edit_job(id):
             form.job.data = jobs.job
             form.work_size.data = jobs.work_size
             form.collaborators.data = jobs.collaborators
+            form.category.data = jobs.categories
             form.is_finished.data = jobs.is_finished
         else:
             abort(404)
@@ -134,6 +143,7 @@ def edit_job(id):
             jobs.job = form.job.data
             jobs.work_size = form.work_size.data
             jobs.collaborators = form.collaborators.data
+            jobs.category = form.category.data
             jobs.is_finished = form.is_finished.data
             db_sess.commit()
             return redirect('/')
