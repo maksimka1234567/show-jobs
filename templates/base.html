@@ -29,7 +29,7 @@
 </main>
 <nav>
     {% if current_user.is_authenticated %}
-    {% if current_page == "" %}
+    {% if current_page == "" or current_page == "departments" %}
     <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
     {% endif %}
     {% else %}
