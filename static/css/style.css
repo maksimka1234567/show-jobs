@@ -7,7 +7,7 @@
     color: #000000 !important;
 }
 .table tbody td:nth-child(6):contains("Завершено") {
-    background-color: #bcc152 !important;
+    background-color: #b6d7a8 !important;
     color: #000000 !important;
 }
 .table tbody td:nth-child(6):contains("Не завершено") {
