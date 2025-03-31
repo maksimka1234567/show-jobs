@@ -1,0 +1,16 @@
+.table thead tr {
+    background-color: #808080 !important;
+    color: #ffffff !important;
+}
+.table tbody tr {
+    background-color: #e6e6fa !important;
+    color: #000000 !important;
+}
+.table tbody td:nth-child(6):contains("Завершено") {
+    background-color: #bcc152 !important;
+    color: #000000 !important;
+}
+.table tbody td:nth-child(6):contains("Не завершено") {
+    background-color: #ffb6c1 !important;
+    color: #000000 !important;
+}

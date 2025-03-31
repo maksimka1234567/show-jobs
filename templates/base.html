@@ -7,6 +7,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% if current_page == "" %}
     {% if current_user.is_authenticated %}
     <title>Works Log</title>
@@ -48,15 +49,18 @@
     <h1 align="center">Works Log</h1>
     {% for job in jobs %}
     <h2>Работа № {{job.id}}</h2>
-    <table class="table table-success table-striped-columns">
+    <table class="table table-striped-columns">
+        <thead>
         <tr>
-            <td>Название работы</td>
-            <td>Тимлид</td>
-            <td>Список участников</td>
-            <td>Категория</td>
-            <td>Время работы</td>
-            <td>Состояние</td>
+            <th>Название работы</th>
+            <th>Тимлид</th>
+            <th>Список участников</th>
+            <th>Категория</th>
+            <th>Время работы</th>
+            <th>Состояние</th>
         </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>{{job.job}}</td>
             <td>{{job.user.name}}</td>
@@ -69,6 +73,7 @@
             <td>Не завершено</td>
             {% endif %}
         </tr>
+        </tbody>
     </table>
     {% if current_user.is_authenticated and (current_user.id == job.team_leader or current_user.id == 1) %}
     <div>
@@ -89,19 +94,23 @@
     <h1 align="center">Departments Log</h1>
     {% for department in departments %}
     <h2>Департамент № {{department.id}}</h2>
-    <table class="table table-success table-striped-columns">
+    <table class="table table-striped-columns">
+        <thead>
         <tr>
-            <td>Название департамента</td>
-            <td>Главный</td>
-            <td>Список участников</td>
-            <td>Почта</td>
+            <th>Название департамента</th>
+            <th>Главный</th>
+            <th>Список участников</th>
+            <th>Почта</th>
         </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>{{department.title}}</td>
             <td>{{department.user.name}}</td>
             <td>{{department.members}}</td>
             <td>{{department.email}}</td>
         </tr>
+        </tbody>
     </table>
     {% if current_user.is_authenticated and (current_user.id == department.chief or current_user.id == 1) %}
     <div>
@@ -118,5 +127,17 @@
     {% endif %}
     {% endif %}
 </nav>
+<script>
+    document.querySelectorAll('tbody td:nth-child(6)').forEach(cell => {
+        if (cell.textContent.trim() === 'Не завершено') {
+            cell.style.backgroundColor = '#ffb6c1';
+            cell.style.color = '#000000';
+        }
+        else {
+            cell.style.backgroundColor = '#bcc152';
+            cell.style.color = '#000000';
+        }
+    });
+</script>
 </body>
 </html>
